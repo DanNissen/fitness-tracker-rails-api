@@ -1,16 +1,16 @@
-class WorkoutsController < OpenReadController
-  before_action :set_workout, only: [:update, :destroy]
+class WorkoutsController < ProtectedController
+  before_action :set_workout, only: %i[show update destroy]
 
   # GET /workouts
   def index
-    @workouts = Workout.all
+    @workouts = current_user.workouts.all
 
     render json: @workouts
   end
 
   # GET /workouts/1
   def show
-    render json: Workout.find(params[:id])
+    render json: @workouts
   end
 
   # POST /workouts
