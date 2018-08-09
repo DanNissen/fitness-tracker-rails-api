@@ -3,7 +3,7 @@ class WorkoutsController < ProtectedController
 
   # GET /workouts
   def index
-    @workouts = current_user.workouts.all
+    @workouts = current_user.workouts.all.group_by(&:date)
 
     render json: @workouts
   end
